@@ -1,0 +1,7 @@
+{
+  "extName": { "message": "LazurQuery" },
+  "extDescription": {
+    "message": "I filtri di ricerca avanzati di Google in un pannello laterale semplice — nessun operatore da ricordare."
+  },
+  "cmd_open_panel": { "message": "Apri il pannello LazurQuery" }
+}

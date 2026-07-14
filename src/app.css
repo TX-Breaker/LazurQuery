@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+/*
+ * Theme via CSS variables only (spec §3.8): no color is hardcoded in components.
+ * Default = light; dark follows the OS (prefers-color-scheme) with zero JS. The optional
+ * Settings override sets data-theme on <html> to force light/dark; when absent we follow the OS.
+ */
+:root {
+  --lq-bg: #ffffff;
+  --lq-surface: #f8fafc;
+  --lq-fg: #1a1d23;
+  --lq-muted: #6b7280;
+  --lq-border: #e5e7eb;
+  --lq-accent: #2563eb;
+  --lq-accent-fg: #ffffff;
+  --lq-warn-bg: #fff7ed;
+  --lq-warn-fg: #9a3412;
+  --lq-warn-border: #fdba74;
+}
+
+/* Dark palette, applied both for the OS preference (when no manual override) and for a
+   forced data-theme="dark". Duplicated because CSS has no variable-group reuse. */
+:root[data-theme='dark'] {
+  --lq-bg: #0f1115;
+  --lq-surface: #161922;
+  --lq-fg: #e6e8ec;
+  --lq-muted: #9aa0aa;
+  --lq-border: #232733;
+  --lq-accent: #5b9dff;
+  --lq-accent-fg: #0b1220;
+  --lq-warn-bg: #2a1b0e;
+  --lq-warn-fg: #fdba74;
+  --lq-warn-border: #7c4a1e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --lq-bg: #0f1115;
+    --lq-surface: #161922;
+    --lq-fg: #e6e8ec;
+    --lq-muted: #9aa0aa;
+    --lq-border: #232733;
+    --lq-accent: #5b9dff;
+    --lq-accent-fg: #0b1220;
+    --lq-warn-bg: #2a1b0e;
+    --lq-warn-fg: #fdba74;
+    --lq-warn-border: #7c4a1e;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--lq-bg);
+  color: var(--lq-fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 14px;
+}
+
+/* --- Component primitives (colors only from variables) --- */
+
+.lq-section {
+  border: 1px solid var(--lq-border);
+  border-radius: 10px;
+  background: var(--lq-surface);
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.lq-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--lq-muted);
+  margin: 0 0 8px;
+}
+
+.lq-field {
+  margin-bottom: 14px;
+}
+.lq-field:last-child {
+  margin-bottom: 0;
+}
+
+.lq-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.lq-desc {
+  font-size: 12px;
+  color: var(--lq-muted);
+  margin: 3px 0 0;
+}
+
+.lq-input,
+.lq-select {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--lq-border);
+  border-radius: 8px;
+  background: var(--lq-bg);
+  color: var(--lq-fg);
+  font: inherit;
+  font-size: 13px;
+}
+.lq-input:focus,
+.lq-select:focus {
+  outline: 2px solid var(--lq-accent);
+  outline-offset: 0;
+  border-color: var(--lq-accent);
+}
+
+/* Big Google-like generic search box */
+.lq-search {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--lq-border);
+  border-radius: 999px;
+  background: var(--lq-bg);
+  color: var(--lq-fg);
+  font: inherit;
+  font-size: 15px;
+}
+.lq-search:focus {
+  outline: 2px solid var(--lq-accent);
+  border-color: var(--lq-accent);
+}
+
+.lq-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.lq-btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--lq-border);
+  background: var(--lq-bg);
+  color: var(--lq-fg);
+  cursor: pointer;
+}
+.lq-btn:hover {
+  border-color: var(--lq-accent);
+}
+.lq-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.lq-btn-primary {
+  background: var(--lq-accent);
+  color: var(--lq-accent-fg);
+  border-color: var(--lq-accent);
+  font-weight: 600;
+}
+.lq-btn-primary:hover {
+  filter: brightness(1.06);
+}
+.lq-btn-sm {
+  padding: 5px 9px;
+  font-size: 12px;
+}
+
+.lq-iconbtn {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--lq-border);
+  background: var(--lq-bg);
+  color: var(--lq-muted);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+.lq-iconbtn:hover {
+  color: var(--lq-fg);
+  border-color: var(--lq-accent);
+}
+
+.lq-link {
+  background: none;
+  border: none;
+  color: var(--lq-accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  padding: 0;
+}
+.lq-link:hover {
+  text-decoration: underline;
+}
+
+/* Quick-add site chips */
+.lq-chiprow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 7px;
+}
+.lq-chip {
+  font: inherit;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--lq-border);
+  background: var(--lq-bg);
+  color: var(--lq-muted);
+  cursor: pointer;
+}
+.lq-chip:hover {
+  border-color: var(--lq-accent);
+  color: var(--lq-fg);
+}
+.lq-chip.is-active {
+  background: var(--lq-accent);
+  color: var(--lq-accent-fg);
+  border-color: var(--lq-accent);
+}
+
+.lq-warn {
+  font-size: 12px;
+  color: var(--lq-warn-fg);
+  background: var(--lq-warn-bg);
+  border: 1px solid var(--lq-warn-border);
+  border-radius: 8px;
+  padding: 7px 9px;
+  margin-bottom: 10px;
+}
+
+.lq-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  background: var(--lq-bg);
+  border: 1px solid var(--lq-border);
+  border-radius: 8px;
+  padding: 7px 9px;
+  word-break: break-all;
+  white-space: pre-wrap;
+  color: var(--lq-fg);
+}
+
+.lq-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  cursor: pointer;
+}
+.lq-check {
+  accent-color: var(--lq-accent);
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  flex: none;
+}
+
+.lq-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.lq-muted {
+  color: var(--lq-muted);
+}
+
+/* Collapsible header (presets) */
+.lq-collapse {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  color: var(--lq-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0;
+  margin-bottom: 8px;
+}
+.lq-collapse:hover {
+  color: var(--lq-fg);
+}
+
+/* Settings rows */
+.lq-set {
+  margin-bottom: 16px;
+}
+.lq-set:last-child {
+  margin-bottom: 0;
+}
+.lq-set-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}

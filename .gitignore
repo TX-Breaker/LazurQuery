@@ -1,0 +1,13 @@
+node_modules
+.wxt
+.output
+stats.html
+*.zip
+*.log
+.DS_Store
+
+# AI session state (local only)
+.ai_state.md
+
+# Working notes / store-listing drafts
+Descrizioni Github.txt

@@ -1,0 +1,53 @@
+{
+  "name": "lazurquery",
+  "version": "0.1.0",
+  "description": "Google's advanced search filters in a friendly cross-browser side panel.",
+  "license": "MIT",
+  "author": "TX-Breaker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TX-Breaker/lazurquery.git"
+  },
+  "homepage": "https://github.com/TX-Breaker/lazurquery#readme",
+  "bugs": {
+    "url": "https://github.com/TX-Breaker/lazurquery/issues"
+  },
+  "keywords": [
+    "browser-extension",
+    "manifest-v3",
+    "chrome-extension",
+    "firefox-addon",
+    "google-search",
+    "search-filters",
+    "wxt",
+    "side-panel"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "wxt prepare && tsc --noEmit",
+    "icons": "node scripts/generate-icons.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/chrome": "^0.2.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@wxt-dev/module-react": "^1.2.2",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9",
+    "wxt": "^0.20.27"
+  }
+}

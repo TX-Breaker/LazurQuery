@@ -1,0 +1,7 @@
+{
+  "extName": { "message": "LazurQuery" },
+  "extDescription": {
+    "message": "Google's advanced search filters in a friendly side panel — no operators to memorize."
+  },
+  "cmd_open_panel": { "message": "Open the LazurQuery panel" }
+}
